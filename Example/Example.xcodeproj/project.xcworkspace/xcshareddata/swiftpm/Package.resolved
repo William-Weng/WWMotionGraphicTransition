@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "wwmotiongraphictransition",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/William-Weng/WWMotionGraphicTransition",
+      "state" : {
+        "revision" : "55010913471127e2cea4514415fe7562646a9d2e",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}
