@@ -58,8 +58,6 @@ public extension WWMotionGraphicTransition.FanBlade {
                     return
                 }
                 
-                print(array)
-
                 if (keyWord == "Start") { delegate?.start(effectView: self, number: number - 1, status: .end); return }
                 if (keyWord == "End") { delegate?.end(effectView: self, number: number - 1, status: .end); return }
             }
