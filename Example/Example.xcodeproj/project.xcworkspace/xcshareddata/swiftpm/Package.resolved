@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/William-Weng/WWMotionGraphicTransition",
       "state" : {
-        "revision" : "55010913471127e2cea4514415fe7562646a9d2e",
-        "version" : "1.0.0"
+        "revision" : "7aec3ba0531bce5f85bfb7233db67af2158d8837",
+        "version" : "1.0.1"
       }
     }
   ],
