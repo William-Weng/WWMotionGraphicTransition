@@ -27,7 +27,7 @@ public extension WWMotionGraphicTransition.DoorCurtain {
     ///   - direction: 動畫方向
     ///   - count: 門簾數量
     ///   - colors: 門簾顏色
-    func start(duration: TimeInterval = 0.5, direction: Direction = .right, count: Int = 3, colors: [UIColor] = [.red, .yellow, .green]) {
+    func start(duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right, count: Int = 3, colors: [UIColor] = [.red, .yellow, .green]) {
         
         subviews.forEach { subview in subview.removeFromSuperview() }
         
@@ -36,7 +36,9 @@ public extension WWMotionGraphicTransition.DoorCurtain {
         
         (0..<count).forEach { index in
             
+            let number = index + 1
             let demoView = UIView(frame: frame)
+            
             demoView.backgroundColor = colors[index % colors.count]
             addSubview(demoView)
             
@@ -56,20 +58,21 @@ public extension WWMotionGraphicTransition.DoorCurtain {
             }
             
             animator.startAnimation(afterDelay: Double(index) * duration * 0.5)
-            delegate?.start(doorCurtain: self, index: index, status: .start)
+            delegate?.start(effectView: self, number: number, status: .start)
             
-            animator.addCompletion { position in
-                self.delegate?.start(doorCurtain: self, index: index, status: .end)
+            animator.addCompletion { [unowned self] position in
+                delegate?.start(effectView: self, number: number, status: .end)
             }
         }
     }
-        
+    
     /// [動畫結束](https://www.appcoda.com.tw/interactive-animation-uiviewpropertyanimator/)
     /// - Parameter duration: 動畫時間
     func end(duration: TimeInterval = 0.5) {
         
         for (index, demoView) in self.subviews.reversed().enumerated() {
             
+            let number = index + 1
             let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) { [unowned self] in
                 
                 switch direction {
@@ -81,10 +84,10 @@ public extension WWMotionGraphicTransition.DoorCurtain {
             }
             
             animator.startAnimation(afterDelay: Double(index) * duration * 0.5)
-            delegate?.end(doorCurtain: self, index: index, status: .start)
+            delegate?.end(effectView: self, number: number, status: .start)
             
-            animator.addCompletion { position in
-                self.delegate?.end(doorCurtain: self, index: index, status: .end)
+            animator.addCompletion { [unowned self] position in
+                delegate?.end(effectView: self, number: number, status: .end)
             }
         }
     }
