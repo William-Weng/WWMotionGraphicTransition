@@ -11,14 +11,15 @@
 ## [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWMotionGraphicTransition.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/William-Weng/WWMotionGraphicTransition.git", .upToNextMajor(from: "1.0.1"))
 ]
 ```
 
 ## 可用函式
 |函式|說明|
 |-|-|
-|start(duration:count:colors:)|動畫開始|
+|build()|建立實體|
+|start(duration:direction:count:colors:)|動畫開始|
 |end(duration:)|動畫結束|
 
 ## Example

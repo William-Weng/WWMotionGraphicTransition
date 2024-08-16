@@ -25,10 +25,10 @@ final class ViewController: UIViewController {
     
     @IBAction func doorCurtainEffect(_ sender: UIBarButtonItem) {
 
-        doorCurtain = WWMotionGraphicTransition.DoorCurtain.maker(frame: faceImageView.bounds)
+        doorCurtain = WWMotionGraphicTransition.DoorCurtain.build(frame: faceImageView.bounds)
         doorCurtain.delegate = self
         faceImageView.addSubview(doorCurtain)
-
+        
         doorCurtain.start(duration: duration, count: count, colors: colors)
     }
 }
