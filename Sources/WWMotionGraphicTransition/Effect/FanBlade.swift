@@ -23,45 +23,11 @@ extension WWMotionGraphicTransition.FanBlade: CAAnimationDelegate {}
 public extension WWMotionGraphicTransition.FanBlade {
     
     func animationDidStart(_ anim: CAAnimation) {
-        
-        mainLayer.sublayers?.forEach({ shapeLayer in
-            
-            if let key = shapeLayer.animationKeys()?.first(where: { shapeLayer.animation(forKey: $0) === anim }) {
-
-                let array = key.components(separatedBy: "_")
-                
-                guard let keyWord = array.first,
-                      let value = array.last,
-                      let number = Int(value)
-                else {
-                    return
-                }
-                
-                if (keyWord == "Start") { delegate?.start(effectView: self, number: number - 1, status: .start); return }
-                if (keyWord == "End") { delegate?.end(effectView: self, number: number - 1, status: .start); return }
-            }
-        })
+        animationDidStartAction(anim)
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        
-        mainLayer.sublayers?.forEach({ shapeLayer in
-            
-            if let key = shapeLayer.animationKeys()?.first(where: { shapeLayer.animation(forKey: $0) === anim }) {
-                
-                let array = key.components(separatedBy: "_")
-                
-                guard let keyWord = array.first,
-                      let value = array.last,
-                      let number = Int(value)
-                else {
-                    return
-                }
-                
-                if (keyWord == "Start") { delegate?.start(effectView: self, number: number - 1, status: .end); return }
-                if (keyWord == "End") { delegate?.end(effectView: self, number: number - 1, status: .end); return }
-            }
-        })
+        animationDidStopAction(anim, finished: flag)
     }
 }
 
@@ -104,7 +70,7 @@ public extension WWMotionGraphicTransition.FanBlade {
     /// - Parameter duration: 動畫時間
     func end(duration: TimeInterval = 0.5) {
         
-        mainLayer.sublayers?.forEach { subLayer in subLayer.removeFromSuperlayer() }
+        mainLayer.sublayers?.forEach { $0.removeFromSuperlayer() }
         layer.addSublayer(mainLayer)
         
         (1...count + 1).forEach { number in
@@ -113,7 +79,7 @@ public extension WWMotionGraphicTransition.FanBlade {
             let delayTime = CGFloat(number) * duration * 0.5
             let lineWidth = layerRadius * 2.0
             
-            let path = UIBezierPath(arcCenter: layerCenter, radius: multiple * layerRadius, startAngle: .pi * -0.5, endAngle: .pi * 0.5, clockwise: true)
+            let path = UIBezierPath(arcCenter: layerCenter, radius: multiple * layerRadius, startAngle: .pi * 0.5, endAngle: .pi * -0.5, clockwise: false)
             let info = CAAnimation._basicAnimation(fromValue: 1.0, toValue: 0.0, duration: duration)
             let strokeColor = colors[number % colors.count]
             let shapeLayer = CAShapeLayer()._path(path.cgPath)._strokeColor(strokeColor)._fillColor(.clear)._lineWidth(lineWidth)
@@ -146,5 +112,53 @@ private extension WWMotionGraphicTransition.FanBlade {
         let shapeLayer = CAShapeLayer()._path(path.cgPath)._strokeColor(strokeColor)._fillColor(.clear)._lineWidth(lineWidth)
         
         return shapeLayer
+    }
+    
+    /// 動畫開始的處理 + WWMotionGraphicTransitionDelegate
+    /// - Parameter anim: CAAnimation
+    func animationDidStartAction(_ anim: CAAnimation) {
+        
+        mainLayer.sublayers?.forEach({ shapeLayer in
+            
+            if let key = shapeLayer.animationKeys()?.first(where: { shapeLayer.animation(forKey: $0) === anim }) {
+
+                let array = key.components(separatedBy: "_")
+                
+                guard let keyWord = array.first,
+                      let value = array.last,
+                      let number = Int(value)
+                else {
+                    return
+                }
+                
+                if (keyWord == animKeyWord.start) { delegate?.start(effectView: self, number: number - 1, status: .start); return }
+                if (keyWord == animKeyWord.end) { delegate?.end(effectView: self, number: number - 1, status: .start); return }
+            }
+        })
+    }
+    
+    /// 動畫結束的處理 + WWMotionGraphicTransitionDelegate
+    /// - Parameters:
+    ///   - anim: CAAnimation
+    ///   - flag: Bool
+    func animationDidStopAction(_ anim: CAAnimation, finished flag: Bool) {
+        
+        mainLayer.sublayers?.forEach({ shapeLayer in
+            
+            if let key = shapeLayer.animationKeys()?.first(where: { shapeLayer.animation(forKey: $0) === anim }) {
+                
+                let array = key.components(separatedBy: "_")
+                
+                guard let keyWord = array.first,
+                      let value = array.last,
+                      let number = Int(value)
+                else {
+                    return
+                }
+                
+                if (keyWord == animKeyWord.start) { delegate?.start(effectView: self, number: number - 1, status: .end); return }
+                if (keyWord == animKeyWord.end) { delegate?.end(effectView: self, number: number - 1, status: .end); return }
+            }
+        })
     }
 }

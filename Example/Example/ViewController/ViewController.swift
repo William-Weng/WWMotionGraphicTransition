@@ -39,7 +39,7 @@ final class ViewController: UIViewController {
         fanBlade.delegate = self
         faceImageView.addSubview(fanBlade)
         
-        fanBlade.start(count: count, colors: colors)
+        fanBlade.start(duration: duration, count: count, colors: colors)
     }
 }
 

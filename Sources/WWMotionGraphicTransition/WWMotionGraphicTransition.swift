@@ -26,7 +26,7 @@ open class WWMotionGraphicTransition {
     
     /// Constant
     public class Constant: NSObject {}
-    
+        
     /// 像單片門簾的開關過場動畫
     public class DoorCurtain: UIView {
         
@@ -45,7 +45,8 @@ open class WWMotionGraphicTransition {
         public weak var delegate: WWMotionGraphicTransitionDelegate?
         
         let mainLayer = CALayer()
-        
+        let animKeyWord: (start: String, end: String) = ("Start", "End")
+
         var count: Int = 0                  // 過場動畫View數量
         var colors: [UIColor] = []          // 過場動畫Layer顏色
         var layerRadius: CGFloat = 0        // Layer圓弧半徑
