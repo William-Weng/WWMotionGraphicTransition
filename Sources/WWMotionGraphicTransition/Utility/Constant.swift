@@ -9,7 +9,9 @@ import UIKit
 
 // MARK: - typealias
 extension WWMotionGraphicTransition.Constant {
-    typealias BasicAnimationInformation = (animation: CABasicAnimation, keyPath: WWMotionGraphicTransition.Constant.AnimationKeyPath)     // Basic動畫資訊
+    
+    typealias BasicAnimationInformation = (animation: CABasicAnimation, keyPath: WWMotionGraphicTransition.Constant.AnimationKeyPath)       // Basic動畫資訊
+    typealias AngleRange = (start: CGFloat, end: CGFloat, clockwise: Bool)                                                                  // 角度範圍 + 是否順時針旋轉
 }
 
 // MARK: - enum

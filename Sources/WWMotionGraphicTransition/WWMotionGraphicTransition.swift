@@ -32,8 +32,8 @@ open class WWMotionGraphicTransition {
         
         public weak var delegate: WWMotionGraphicTransitionDelegate?
         
-        var count: Int = 0                  // 過場動畫View數量
-        var direction: Direction = .right   // 過場動畫的方向
+        var count: Int = 0                                          // 過場動畫View數量
+        var direction: Direction = .right                           // 過場動畫的方向
         
         public override init(frame: CGRect) { super.init(frame: frame) }
         required init?(coder: NSCoder) { super.init(coder: coder) }
@@ -47,10 +47,11 @@ open class WWMotionGraphicTransition {
         let mainLayer = CALayer()
         let animKeyWord: (start: String, end: String) = ("Start", "End")
 
-        var count: Int = 0                  // 過場動畫View數量
-        var colors: [UIColor] = []          // 過場動畫Layer顏色
-        var layerRadius: CGFloat = 0        // Layer圓弧半徑
-        var layerCenter: CGPoint = .zero    // Layer圓弧中點
+        var count: Int = 0                                          // 過場動畫View數量
+        var colors: [UIColor] = []                                  // 過場動畫Layer顏色四
+        var direction: WWMotionGraphicTransition.Direction = .right // 過場動畫的方向
+        var layerRadius: CGFloat = 0                                // Layer圓弧半徑
+        var layerCenter: CGPoint = .zero                            // Layer圓弧中點
         
         public override init(frame: CGRect) { super.init(frame: frame) }
         required init?(coder: NSCoder) { super.init(coder: coder) }
