@@ -11,7 +11,7 @@
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWMotionGraphicTransition.git", .upToNextMajor(from: "1.0.1"))
+    .package(url: "https://github.com/William-Weng/WWMotionGraphicTransition.git", .upToNextMajor(from: "1.1.3"))
 ]
 ```
 
@@ -54,7 +54,7 @@ final class ViewController: UIViewController {
         doorCurtain.delegate = self
         faceImageView.addSubview(doorCurtain)
         
-        doorCurtain.start(duration: duration, count: count, colors: colors)
+        doorCurtain.start(duration: duration, direction: .right, count: count, colors: colors)
     }
     
     @IBAction func fanBladeEffect(_ sender: UIBarButtonItem) {
@@ -63,7 +63,7 @@ final class ViewController: UIViewController {
         fanBlade.delegate = self
         faceImageView.addSubview(fanBlade)
         
-        fanBlade.start(duration: duration, count: count, colors: colors)
+        fanBlade.start(duration: duration, direction: .right, count: count, colors: colors)
     }
 }
 

@@ -30,7 +30,7 @@ final class ViewController: UIViewController {
         doorCurtain.delegate = self
         faceImageView.addSubview(doorCurtain)
         
-        doorCurtain.start(duration: duration, count: count, colors: colors)
+        doorCurtain.start(duration: duration, direction: .right, count: count, colors: colors)
     }
     
     @IBAction func fanBladeEffect(_ sender: UIBarButtonItem) {
@@ -39,7 +39,7 @@ final class ViewController: UIViewController {
         fanBlade.delegate = self
         faceImageView.addSubview(fanBlade)
         
-        fanBlade.start(duration: duration, count: count, colors: colors)
+        fanBlade.start(duration: duration, direction: .right, count: count, colors: colors)
     }
 }
 
