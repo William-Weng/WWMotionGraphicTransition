@@ -49,7 +49,7 @@ extension ViewController: WWMotionGraphicTransitionDelegate {
     func start(effectView: UIView, number: Int, status: WWMotionGraphicTransition.Status) {
         
         faceImageView.image = UIImage(named: "Face1")
-                
+        
         if (number < count) { return }
         if (status != .end) { return }
         

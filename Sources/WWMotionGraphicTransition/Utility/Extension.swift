@@ -66,9 +66,10 @@ extension CAAnimation {
     ///   - duration: 動畫時間
     ///   - repeatCount: 播放次數
     ///   - fillMode: [CAMediaTimingFillMode](https://juejin.cn/post/6991371790245183496)
+    ///   - timingFunction: CAMediaTimingFunction?
     ///   - isRemovedOnCompletion: Bool
     /// - Returns: Constant.CAAnimationInformation
-    static func _basicAnimation(keyPath: WWMotionGraphicTransition.Constant.AnimationKeyPath = .strokeEnd, delegate: CAAnimationDelegate? = nil, fromValue: Any?, toValue: Any?, duration: CFTimeInterval = 1.0, repeatCount: Float = 1.0, fillMode: CAMediaTimingFillMode = .forwards, isRemovedOnCompletion: Bool = false) -> WWMotionGraphicTransition.Constant.BasicAnimationInformation {
+    static func _basicAnimation(keyPath: WWMotionGraphicTransition.Constant.AnimationKeyPath = .strokeEnd, delegate: CAAnimationDelegate? = nil, fromValue: Any?, toValue: Any?, duration: CFTimeInterval = 5.0, repeatCount: Float = 1.0, fillMode: CAMediaTimingFillMode = .forwards, timingFunction: CAMediaTimingFunction? = nil, isRemovedOnCompletion: Bool = false) -> WWMotionGraphicTransition.Constant.BasicAnimationInformation {
         
         let animation = CABasicAnimation(keyPath: keyPath.rawValue)
         
@@ -79,6 +80,7 @@ extension CAAnimation {
         animation.fillMode = fillMode
         animation.isRemovedOnCompletion = isRemovedOnCompletion
         animation.delegate = delegate
+        animation.timingFunction = timingFunction
         
         return (animation, keyPath)
     }
