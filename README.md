@@ -6,12 +6,12 @@
 - [Imitate the polygonal transition animation commonly used in movies.](https://youtu.be/jlR2J_Ztl4Y)
 - [模仿影片常用的多邊形轉場動畫。](https://tw.cyberlink.com/blog/the-top-video-editors/982/motion-graphics)
 
-![WWMotionGraphicTransition](./Example.gif)
+![WWMotionGraphicTransition](./Example.webp)
 
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWMotionGraphicTransition.git", .upToNextMajor(from: "1.1.3"))
+    .package(url: "https://github.com/William-Weng/WWMotionGraphicTransition.git", .upToNextMajor(from: "1.1.4"))
 ]
 ```
 
@@ -46,23 +46,16 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initSetting()
     }
     
     @IBAction func doorCurtainEffect(_ sender: UIBarButtonItem) {
-        
-        doorCurtain = WWMotionGraphicTransition.DoorCurtain.build(frame: faceImageView.bounds)
-        doorCurtain.delegate = self
         faceImageView.addSubview(doorCurtain)
-        
         doorCurtain.start(duration: duration, direction: .right, count: count, colors: colors)
     }
     
     @IBAction func fanBladeEffect(_ sender: UIBarButtonItem) {
-        
-        fanBlade = WWMotionGraphicTransition.FanBlade.build(frame: faceImageView.bounds)
-        fanBlade.delegate = self
         faceImageView.addSubview(fanBlade)
-        
         fanBlade.start(duration: duration, direction: .right, count: count, colors: colors)
     }
 }
@@ -72,7 +65,7 @@ extension ViewController: WWMotionGraphicTransitionDelegate {
     func start(effectView: UIView, number: Int, status: WWMotionGraphicTransition.Status) {
         
         faceImageView.image = UIImage(named: "Face1")
-                
+        
         if (number < count) { return }
         if (status != .end) { return }
         
@@ -89,6 +82,16 @@ extension ViewController: WWMotionGraphicTransitionDelegate {
         
         if effectView is WWMotionGraphicTransition.DoorCurtain { doorCurtain.removeFromSuperview(); return }
         if effectView is WWMotionGraphicTransition.FanBlade { fanBlade.removeFromSuperview(); return}
+    }
+}
+
+private extension ViewController {
+    
+    func initSetting() {
+        doorCurtain = WWMotionGraphicTransition.DoorCurtain.build(frame: faceImageView.bounds)
+        fanBlade = WWMotionGraphicTransition.FanBlade.build(frame: faceImageView.bounds)
+        doorCurtain.delegate = self
+        fanBlade.delegate = self
     }
 }
 ```

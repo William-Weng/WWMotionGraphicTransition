@@ -53,6 +53,7 @@ public extension WWMotionGraphicTransition.FanBlade {
         self.layerCenter = layerCenter
         
         mainLayer.sublayers?.forEach { subLayer in subLayer.removeFromSuperlayer() }
+        
         layer.addSublayer(mainLayer)
         
         (1...count + 1).forEach { number in

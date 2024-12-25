@@ -48,7 +48,7 @@ open class WWMotionGraphicTransition {
         let animKeyWord: (start: String, end: String) = ("Start", "End")
 
         var count: Int = 0                                          // 過場動畫View數量
-        var colors: [UIColor] = []                                  // 過場動畫Layer顏色四
+        var colors: [UIColor] = []                                  // 過場動畫Layer顏色
         var direction: WWMotionGraphicTransition.Direction = .right // 過場動畫的方向
         var layerRadius: CGFloat = 0                                // Layer圓弧半徑
         var layerCenter: CGPoint = .zero                            // Layer圓弧中點

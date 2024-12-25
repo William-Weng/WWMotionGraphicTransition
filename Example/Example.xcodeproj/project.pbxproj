@@ -14,7 +14,9 @@
 		3DBCD88026F198F300522E3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87E26F198F300522E3B /* LaunchScreen.storyboard */; };
 		8114FF602C6EE42C00774B83 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 8114FF5F2C6EE42C00774B83 /* WWMotionGraphicTransition */; };
 		812CBEFF2C6B3283002A5460 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 812CBEFE2C6B3283002A5460 /* WWMotionGraphicTransition */; };
-		81B334082C6F5732005710F6 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 81B334072C6F5732005710F6 /* WWMotionGraphicTransition */; };
+		8180458F2D1BFCDB008F3843 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 8180458E2D1BFCDB008F3843 /* WWMotionGraphicTransition */; };
+		818045952D1C0BC0008F3843 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 818045942D1C0BC0008F3843 /* WWMotionGraphicTransition */; };
+		818045982D1C0C29008F3843 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 818045972D1C0C29008F3843 /* WWMotionGraphicTransition */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +34,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81B334082C6F5732005710F6 /* WWMotionGraphicTransition in Frameworks */,
+				818045982D1C0C29008F3843 /* WWMotionGraphicTransition in Frameworks */,
+				8180458F2D1BFCDB008F3843 /* WWMotionGraphicTransition in Frameworks */,
 				8114FF602C6EE42C00774B83 /* WWMotionGraphicTransition in Frameworks */,
+				818045952D1C0BC0008F3843 /* WWMotionGraphicTransition in Frameworks */,
 				812CBEFF2C6B3283002A5460 /* WWMotionGraphicTransition in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,7 +125,9 @@
 			packageProductDependencies = (
 				812CBEFE2C6B3283002A5460 /* WWMotionGraphicTransition */,
 				8114FF5F2C6EE42C00774B83 /* WWMotionGraphicTransition */,
-				81B334072C6F5732005710F6 /* WWMotionGraphicTransition */,
+				8180458E2D1BFCDB008F3843 /* WWMotionGraphicTransition */,
+				818045942D1C0BC0008F3843 /* WWMotionGraphicTransition */,
+				818045972D1C0C29008F3843 /* WWMotionGraphicTransition */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -152,7 +158,7 @@
 			);
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
-				81B334062C6F5732005710F6 /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */,
+				818045962D1C0C29008F3843 /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -260,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -316,7 +322,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -398,12 +404,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		81B334062C6F5732005710F6 /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */ = {
+		818045962D1C0C29008F3843 /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWMotionGraphicTransition";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
+				minimumVersion = 1.1.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -417,9 +423,17 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = WWMotionGraphicTransition;
 		};
-		81B334072C6F5732005710F6 /* WWMotionGraphicTransition */ = {
+		8180458E2D1BFCDB008F3843 /* WWMotionGraphicTransition */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 81B334062C6F5732005710F6 /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */;
+			productName = WWMotionGraphicTransition;
+		};
+		818045942D1C0BC0008F3843 /* WWMotionGraphicTransition */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WWMotionGraphicTransition;
+		};
+		818045972D1C0C29008F3843 /* WWMotionGraphicTransition */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 818045962D1C0C29008F3843 /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */;
 			productName = WWMotionGraphicTransition;
 		};
 /* End XCSwiftPackageProductDependency section */

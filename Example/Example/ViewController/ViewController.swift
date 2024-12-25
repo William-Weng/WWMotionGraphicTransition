@@ -22,23 +22,16 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initSetting()
     }
     
     @IBAction func doorCurtainEffect(_ sender: UIBarButtonItem) {
-        
-        doorCurtain = WWMotionGraphicTransition.DoorCurtain.build(frame: faceImageView.bounds)
-        doorCurtain.delegate = self
         faceImageView.addSubview(doorCurtain)
-        
         doorCurtain.start(duration: duration, direction: .right, count: count, colors: colors)
     }
     
     @IBAction func fanBladeEffect(_ sender: UIBarButtonItem) {
-        
-        fanBlade = WWMotionGraphicTransition.FanBlade.build(frame: faceImageView.bounds)
-        fanBlade.delegate = self
         faceImageView.addSubview(fanBlade)
-        
         fanBlade.start(duration: duration, direction: .right, count: count, colors: colors)
     }
 }
@@ -66,5 +59,17 @@ extension ViewController: WWMotionGraphicTransitionDelegate {
         
         if effectView is WWMotionGraphicTransition.DoorCurtain { doorCurtain.removeFromSuperview(); return }
         if effectView is WWMotionGraphicTransition.FanBlade { fanBlade.removeFromSuperview(); return}
+    }
+}
+
+// MARK: - 小工具
+private extension ViewController {
+    
+    /// 初始化設定
+    func initSetting() {
+        doorCurtain = WWMotionGraphicTransition.DoorCurtain.build(frame: faceImageView.bounds)
+        fanBlade = WWMotionGraphicTransition.FanBlade.build(frame: faceImageView.bounds)
+        doorCurtain.delegate = self
+        fanBlade.delegate = self
     }
 }

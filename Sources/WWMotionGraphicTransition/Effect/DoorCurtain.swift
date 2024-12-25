@@ -29,11 +29,11 @@ public extension WWMotionGraphicTransition.DoorCurtain {
     ///   - colors: 門簾顏色
     func start(duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right, count: Int = 3, colors: [UIColor] = [.red, .yellow, .green]) {
         
-        subviews.forEach { subview in subview.removeFromSuperview() }
+        subviews.forEach { $0.removeFromSuperview() }
         
         self.count = count
         self.direction = direction
-        
+                
         (0..<count).forEach { index in
             
             let number = index + 1
@@ -70,16 +70,16 @@ public extension WWMotionGraphicTransition.DoorCurtain {
     /// - Parameter duration: 動畫時間
     func end(duration: TimeInterval = 0.5) {
         
-        for (index, demoView) in self.subviews.reversed().enumerated() {
+        for (index, effectView) in self.subviews.reversed().enumerated() {
             
             let number = index + 1
             let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) { [unowned self] in
                 
                 switch direction {
-                case .up: demoView.frame.origin.y = -frame.height
-                case .down: demoView.frame.origin.y = frame.height
-                case .left: demoView.frame.origin.x = -frame.width
-                case .right: demoView.frame.origin.x = frame.width
+                case .up: effectView.frame.origin.y = -frame.height
+                case .down: effectView.frame.origin.y = frame.height
+                case .left: effectView.frame.origin.x = -frame.width
+                case .right: effectView.frame.origin.x = frame.width
                 }
             }
             
@@ -87,6 +87,7 @@ public extension WWMotionGraphicTransition.DoorCurtain {
             delegate?.end(effectView: self, number: number, status: .start)
             
             animator.addCompletion { [unowned self] position in
+                effectView.removeFromSuperview()
                 delegate?.end(effectView: self, number: number, status: .end)
             }
         }
