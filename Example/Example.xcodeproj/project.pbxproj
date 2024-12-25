@@ -409,7 +409,7 @@
 			repositoryURL = "https://github.com/William-Weng/WWMotionGraphicTransition";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.3;
+				minimumVersion = 1.1.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
