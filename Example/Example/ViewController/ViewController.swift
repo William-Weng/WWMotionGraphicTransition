@@ -27,12 +27,12 @@ final class ViewController: UIViewController {
     
     @IBAction func doorCurtainEffect(_ sender: UIBarButtonItem) {
         faceImageView.addSubview(doorCurtain)
-        doorCurtain.start(duration: duration, direction: .right, count: count, colors: colors)
+        doorCurtain.start(count: count, colors: colors, duration: duration)
     }
     
     @IBAction func fanBladeEffect(_ sender: UIBarButtonItem) {
         faceImageView.addSubview(fanBlade)
-        fanBlade.start(duration: duration, direction: .right, count: count, colors: colors)
+        fanBlade.start(count: count, colors: colors, duration: duration)
     }
 }
 

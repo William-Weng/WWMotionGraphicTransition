@@ -23,74 +23,117 @@ public extension WWMotionGraphicTransition.DoorCurtain {
     
     /// [動畫開始](https://cod-chill-component.pages.dev/)
     /// - Parameters:
-    ///   - duration: 動畫時間
-    ///   - direction: 動畫方向
     ///   - count: 門簾數量
     ///   - colors: 門簾顏色
-    func start(duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right, count: Int = 3, colors: [UIColor] = [.red, .yellow, .green]) {
-        
-        subviews.forEach { $0.removeFromSuperview() }
-        
-        self.count = count
-        self.direction = direction
-                
-        (0..<count).forEach { index in
-            
-            let number = index + 1
-            let demoView = UIView(frame: frame)
-            
-            demoView.backgroundColor = colors[index % colors.count]
-            addSubview(demoView)
-            
-            switch direction {
-            case .up: demoView.frame.origin.y = frame.height
-            case .down: demoView.frame.origin.y = -frame.height
-            case .left: demoView.frame.origin.x = frame.width
-            case .right: demoView.frame.origin.x = -frame.width
-            }
-                        
-            let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) { [unowned self] in
-                
-                switch direction {
-                case .up, .down: demoView.frame.origin.y = 0
-                case .left, .right: demoView.frame.origin.x = 0
-                }
-            }
-            
-            animator.startAnimation(afterDelay: Double(index) * duration * 0.5)
-            delegate?.start(effectView: self, number: number, status: .start)
-            
-            animator.addCompletion { [unowned self] position in
-                delegate?.start(effectView: self, number: number, status: .end)
-            }
-        }
+    ///   - duration: 動畫時間
+    ///   - direction: 動畫方向
+    func start(count: Int = 3, colors: [UIColor] = [.red, .yellow, .green], duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right) {
+        effectSubViewMaker(with: count, duration: duration, direction: direction, colors: colors)
     }
     
     /// [動畫結束](https://www.appcoda.com.tw/interactive-animation-uiviewpropertyanimator/)
-    /// - Parameter duration: 動畫時間
-    func end(duration: TimeInterval = 0.5) {
-        
-        for (index, effectView) in self.subviews.reversed().enumerated() {
-            
-            let number = index + 1
-            let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) { [unowned self] in
-                
-                switch direction {
-                case .up: effectView.frame.origin.y = -frame.height
-                case .down: effectView.frame.origin.y = frame.height
-                case .left: effectView.frame.origin.x = -frame.width
-                case .right: effectView.frame.origin.x = frame.width
-                }
-            }
-            
-            animator.startAnimation(afterDelay: Double(index) * duration * 0.5)
-            delegate?.end(effectView: self, number: number, status: .start)
-            
-            animator.addCompletion { [unowned self] position in
-                effectView.removeFromSuperview()
-                delegate?.end(effectView: self, number: number, status: .end)
-            }
-        }
+    ///   - duration: 動畫時間
+    ///   - direction: 動畫方向
+    func end(duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right) {
+        removeEffectSubView(duration: duration, direction: direction)
     }
 }
 
+// MARK: - 小工具
+private extension WWMotionGraphicTransition.DoorCurtain {
+    
+    /// 效果View產生器
+    /// - Parameters:
+    ///   - count: Int
+    ///   - duration: TimeInterval
+    ///   - direction: WWMotionGraphicTransition.Direction
+    ///   - colors: [UIColor]
+    func effectSubViewMaker(with count: Int, duration: TimeInterval, direction: WWMotionGraphicTransition.Direction, colors: [UIColor]) {
+        
+        (0..<count).forEach { index in
+            
+            let effectSubView = UIView(frame: frame)
+            
+            effectSubView.backgroundColor = colors[index % colors.count]
+            addSubview(effectSubView)
+            
+            effectSubViewAnimation(with: index, subView: effectSubView, duration: duration, direction: direction)
+        }
+    }
+    
+    /// 移除效果View
+    /// - Parameters:
+    ///   - duration: TimeInterval
+    ///   - direction: WWMotionGraphicTransition.Direction
+    func removeEffectSubView(duration: TimeInterval, direction: WWMotionGraphicTransition.Direction) {
+        
+        for (index, effectSubView) in self.subviews.reversed().enumerated() {
+            removeEffectSubViewAnimation(with: index, subView: effectSubView, duration: duration, direction: direction)
+        }
+    }
+    
+    /// 效果View的動畫效果
+    /// - Parameters:
+    ///   - index: Int
+    ///   - subView: UIView
+    ///   - duration: TimeInterval
+    ///   - direction: WWMotionGraphicTransition.Direction
+    func effectSubViewAnimation(with index: Int, subView: UIView, duration: TimeInterval, direction: WWMotionGraphicTransition.Direction) {
+        
+        let number = index + 1
+        
+        switch direction {
+        case .up: subView.frame.origin.y = frame.height
+        case .down: subView.frame.origin.y = -frame.height
+        case .left: subView.frame.origin.x = frame.width
+        case .right: subView.frame.origin.x = -frame.width
+        }
+        
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) { [unowned self] in
+            switch direction {
+            case .up, .down: subView.frame.origin.y = 0
+            case .left, .right: subView.frame.origin.x = 0
+            }
+        }
+        
+        animator.startAnimation(afterDelay: Double(index) * duration * 0.5)
+        delegate?.start(effectView: self, number: number, status: .start)
+        
+        animator.addCompletion { [unowned self] position in
+            delegate?.start(effectView: self, number: number, status: .end)
+        }
+    }
+    
+    /// 移除效果View的動畫效果
+    /// - Parameters:
+    ///   - index: Int
+    ///   - subView: UIView
+    ///   - duration: TimeInterval
+    ///   - direction: WWMotionGraphicTransition.Direction
+    func removeEffectSubViewAnimation(with index: Int, subView: UIView, duration: TimeInterval, direction: WWMotionGraphicTransition.Direction) {
+        
+        switch direction {
+        case .up, .down: subView.frame.origin.y = 0
+        case .left, .right: subView.frame.origin.x = 0
+        }
+        
+        let number = index + 1
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn) { [unowned self] in
+            
+            switch direction {
+            case .up: subView.frame.origin.y = -frame.height
+            case .down: subView.frame.origin.y = frame.height
+            case .left: subView.frame.origin.x = -frame.width
+            case .right: subView.frame.origin.x = frame.width
+            }
+        }
+        
+        animator.startAnimation(afterDelay: Double(index) * duration * 0.5)
+        delegate?.end(effectView: self, number: number, status: .start)
+        
+        animator.addCompletion { [unowned self] position in
+            subView.removeFromSuperview()
+            delegate?.end(effectView: self, number: number, status: .end)
+        }
+    }
+}

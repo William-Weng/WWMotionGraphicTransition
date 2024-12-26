@@ -36,11 +36,11 @@ public extension WWMotionGraphicTransition.FanBlade {
     
     /// [動畫開始](https://cod-chill-component.pages.dev/)
     /// - Parameters:
-    ///   - duration: 動畫時間
-    ///   - direction: 動畫方向
     ///   - count: 風扇葉片數量
     ///   - colors: 風扇葉片顏色
-    func start(duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right, count: Int = 3, colors: [UIColor] = [.red, .yellow, .green]) {
+    ///   - duration: 動畫時間
+    ///   - direction: 動畫方向
+    func start(count: Int = 3, colors: [UIColor] = [.red, .yellow, .green], duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right) {
         
         let layerRadius = frame.width * 0.5 / CGFloat(count)
         let layerCenter = layerCenter(with: direction, radius: layerRadius)
@@ -48,12 +48,10 @@ public extension WWMotionGraphicTransition.FanBlade {
         
         self.count = count
         self.colors = colors
-        self.direction = direction
         self.layerRadius = layerRadius
         self.layerCenter = layerCenter
         
         mainLayer.sublayers?.forEach { subLayer in subLayer.removeFromSuperlayer() }
-        
         layer.addSublayer(mainLayer)
         
         (1...count + 1).forEach { number in
@@ -70,8 +68,10 @@ public extension WWMotionGraphicTransition.FanBlade {
     }
     
     /// [動畫結束](https://www.appcoda.com.tw/interactive-animation-uiviewpropertyanimator/)
-    /// - Parameter duration: 動畫時間
-    func end(duration: TimeInterval = 0.5) {
+    /// - Parameters:
+    ///   - duration: 動畫時間
+    ///   - direction: 動畫方向
+    func end(duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right) {
         
         let angleRange = angleRange(with: direction)
         

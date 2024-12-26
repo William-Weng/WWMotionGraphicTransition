@@ -11,7 +11,7 @@
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWMotionGraphicTransition.git", .upToNextMajor(from: "1.1.4"))
+    .package(url: "https://github.com/William-Weng/WWMotionGraphicTransition.git", .upToNextMajor(from: "1.2.0"))
 ]
 ```
 
@@ -25,8 +25,8 @@ dependencies: [
 |函式|說明|
 |-|-|
 |build()|建立實體|
-|start(duration:direction:count:colors:)|動畫開始|
-|end(duration:)|動畫結束|
+|start(count:colors:duration:direction:)|動畫開始|
+|end(duration:direction:)|動畫結束|
 
 ### Example
 ```swift
@@ -51,12 +51,12 @@ final class ViewController: UIViewController {
     
     @IBAction func doorCurtainEffect(_ sender: UIBarButtonItem) {
         faceImageView.addSubview(doorCurtain)
-        doorCurtain.start(duration: duration, direction: .right, count: count, colors: colors)
+        doorCurtain.start(count: count, colors: colors, duration: duration)
     }
     
     @IBAction func fanBladeEffect(_ sender: UIBarButtonItem) {
         faceImageView.addSubview(fanBlade)
-        fanBlade.start(duration: duration, direction: .right, count: count, colors: colors)
+        fanBlade.start(count: count, colors: colors, duration: duration)
     }
 }
 
