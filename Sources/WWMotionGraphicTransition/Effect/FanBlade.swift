@@ -42,17 +42,41 @@ public extension WWMotionGraphicTransition.FanBlade {
     ///   - direction: 動畫方向
     func start(count: Int = 3, colors: [UIColor] = [.red, .yellow, .green], duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right) {
         
+        mainLayer.sublayers?.forEach { subLayer in subLayer.removeFromSuperlayer() }        
+        subLayerAnimation(count: count, colors: colors, duration: duration, direction: direction)
+    }
+    
+    /// [動畫結束](https://www.appcoda.com.tw/interactive-animation-uiviewpropertyanimator/)
+    /// - Parameters:
+    ///   - duration: 動畫時間
+    ///   - direction: 動畫方向
+    func end(duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right) {
+        
+        guard let sublayers = mainLayer.sublayers else { return }
+        
+        sublayers.forEach { $0.removeFromSuperlayer() }
+        cleanSubLayerAnimation(count: sublayers.count, duration: duration, direction: direction)
+    }
+}
+
+// MARK: - 小工具
+private extension WWMotionGraphicTransition.FanBlade {
+        
+    /// 開始的Layer動畫 (畫半圓)
+    /// - Parameters:
+    ///   - count: Int
+    ///   - colors: [UIColor]
+    ///   - duration: TimeInterval
+    ///   - direction: WWMotionGraphicTransition.Direction
+    func subLayerAnimation(count: Int, colors: [UIColor], duration: TimeInterval, direction: WWMotionGraphicTransition.Direction) {
+        
         let layerRadius = frame.width * 0.5 / CGFloat(count)
         let layerCenter = layerCenter(with: direction, radius: layerRadius)
         let angleRange = angleRange(with: direction)
         
-        self.count = count
         self.colors = colors
         self.layerRadius = layerRadius
         self.layerCenter = layerCenter
-        
-        mainLayer.sublayers?.forEach { subLayer in subLayer.removeFromSuperlayer() }
-        layer.addSublayer(mainLayer)
         
         (1...count + 1).forEach { number in
             
@@ -67,18 +91,16 @@ public extension WWMotionGraphicTransition.FanBlade {
         }
     }
     
-    /// [動畫結束](https://www.appcoda.com.tw/interactive-animation-uiviewpropertyanimator/)
+    /// 清除的Layer (圓倒著畫 => 變短)
     /// - Parameters:
-    ///   - duration: 動畫時間
-    ///   - direction: 動畫方向
-    func end(duration: TimeInterval = 0.5, direction: WWMotionGraphicTransition.Direction = .right) {
+    ///   - count: Int
+    ///   - duration: TimeInterval
+    ///   - direction: WWMotionGraphicTransition.Direction
+    func cleanSubLayerAnimation(count: Int, duration: TimeInterval, direction: WWMotionGraphicTransition.Direction) {
         
         let angleRange = angleRange(with: direction)
         
-        mainLayer.sublayers?.forEach { $0.removeFromSuperlayer() }
-        layer.addSublayer(mainLayer)
-        
-        (1...count + 1).forEach { number in
+        (1...count).forEach { number in
             
             let multiple = CGFloat(number) * 2 + 1
             let delayTime = CGFloat(number) * duration * 0.5
@@ -96,10 +118,6 @@ public extension WWMotionGraphicTransition.FanBlade {
             }
         }
     }
-}
-
-// MARK: - 小工具
-private extension WWMotionGraphicTransition.FanBlade {
     
     /// 產生圓弧Layer
     /// - Parameters:
