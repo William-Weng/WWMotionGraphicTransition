@@ -16,11 +16,12 @@
 		810606CF2D1D23CF00A33349 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 810606CE2D1D23CF00A33349 /* WWMotionGraphicTransition */; };
 		8114FF602C6EE42C00774B83 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 8114FF5F2C6EE42C00774B83 /* WWMotionGraphicTransition */; };
 		812CBEFF2C6B3283002A5460 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 812CBEFE2C6B3283002A5460 /* WWMotionGraphicTransition */; };
-		8172241E2D1E8FB100264B50 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 8172241D2D1E8FB100264B50 /* WWMotionGraphicTransition */; };
+		817224212D1E910900264B50 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 817224202D1E910900264B50 /* WWMotionGraphicTransition */; };
 		8180458F2D1BFCDB008F3843 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 8180458E2D1BFCDB008F3843 /* WWMotionGraphicTransition */; };
 		818045952D1C0BC0008F3843 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 818045942D1C0BC0008F3843 /* WWMotionGraphicTransition */; };
 		8180459B2D1C0D99008F3843 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 8180459A2D1C0D99008F3843 /* WWMotionGraphicTransition */; };
 		81C6D53A2D1CFB140002B828 /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 81C6D5392D1CFB140002B828 /* WWMotionGraphicTransition */; };
+		81CCA3E02D1E991200E6326A /* WWMotionGraphicTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 81CCA3DF2D1E991200E6326A /* WWMotionGraphicTransition */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,13 +39,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81CCA3E02D1E991200E6326A /* WWMotionGraphicTransition in Frameworks */,
 				810606C92D1D072F00A33349 /* WWMotionGraphicTransition in Frameworks */,
 				81C6D53A2D1CFB140002B828 /* WWMotionGraphicTransition in Frameworks */,
 				8180459B2D1C0D99008F3843 /* WWMotionGraphicTransition in Frameworks */,
 				8180458F2D1BFCDB008F3843 /* WWMotionGraphicTransition in Frameworks */,
 				8114FF602C6EE42C00774B83 /* WWMotionGraphicTransition in Frameworks */,
 				818045952D1C0BC0008F3843 /* WWMotionGraphicTransition in Frameworks */,
-				8172241E2D1E8FB100264B50 /* WWMotionGraphicTransition in Frameworks */,
+				817224212D1E910900264B50 /* WWMotionGraphicTransition in Frameworks */,
 				810606CF2D1D23CF00A33349 /* WWMotionGraphicTransition in Frameworks */,
 				812CBEFF2C6B3283002A5460 /* WWMotionGraphicTransition in Frameworks */,
 			);
@@ -139,7 +141,8 @@
 				81C6D5392D1CFB140002B828 /* WWMotionGraphicTransition */,
 				810606C82D1D072F00A33349 /* WWMotionGraphicTransition */,
 				810606CE2D1D23CF00A33349 /* WWMotionGraphicTransition */,
-				8172241D2D1E8FB100264B50 /* WWMotionGraphicTransition */,
+				817224202D1E910900264B50 /* WWMotionGraphicTransition */,
+				81CCA3DF2D1E991200E6326A /* WWMotionGraphicTransition */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -170,7 +173,7 @@
 			);
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
-				8172241C2D1E8FB000264B50 /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */,
+				81CCA3DE2D1E991200E6326A /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -416,12 +419,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8172241C2D1E8FB000264B50 /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */ = {
+		81CCA3DE2D1E991200E6326A /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWMotionGraphicTransition";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
+				minimumVersion = 1.2.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -443,9 +446,8 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = WWMotionGraphicTransition;
 		};
-		8172241D2D1E8FB100264B50 /* WWMotionGraphicTransition */ = {
+		817224202D1E910900264B50 /* WWMotionGraphicTransition */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8172241C2D1E8FB000264B50 /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */;
 			productName = WWMotionGraphicTransition;
 		};
 		8180458E2D1BFCDB008F3843 /* WWMotionGraphicTransition */ = {
@@ -462,6 +464,11 @@
 		};
 		81C6D5392D1CFB140002B828 /* WWMotionGraphicTransition */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = WWMotionGraphicTransition;
+		};
+		81CCA3DF2D1E991200E6326A /* WWMotionGraphicTransition */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81CCA3DE2D1E991200E6326A /* XCRemoteSwiftPackageReference "WWMotionGraphicTransition" */;
 			productName = WWMotionGraphicTransition;
 		};
 /* End XCSwiftPackageProductDependency section */

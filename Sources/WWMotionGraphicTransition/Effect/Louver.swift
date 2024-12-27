@@ -86,7 +86,7 @@ private extension WWMotionGraphicTransition.Louver {
         
         effectSubViewAnimation(isDisplay: isDisplay, duration: duration, direction: direction)
     }
-    
+        
     /// 效果View動畫處理
     /// - Parameters:
     ///   - isDisplay: Bool
@@ -94,13 +94,12 @@ private extension WWMotionGraphicTransition.Louver {
     ///   - direction: WWMotionGraphicTransition.Direction
     func effectSubViewAnimation(isDisplay: Bool, duration: TimeInterval, direction: WWMotionGraphicTransition.Direction) {
         
-        let fromValue = isDisplay ? CATransform3DMakeRotation(CGFloat.pi / 2, 0, 1, 0) : CATransform3DIdentity
-        let toValue = isDisplay ? CATransform3DIdentity : CATransform3DMakeRotation(CGFloat.pi / 2, 0, 1, 0)
+        let fromValue = transform3DRotation(isDisplay: isDisplay, direction: direction)
+        let toValue = transform3DRotation(isDisplay: !isDisplay, direction: direction)
         let key = isDisplay ? WWMotionGraphicTransition.animKeyWord.start : WWMotionGraphicTransition.animKeyWord.end
-        
         let info = CABasicAnimation._basicAnimation(keyPath: .transform, delegate: self, fromValue: NSValue(caTransform3D: fromValue), toValue: NSValue(caTransform3D: toValue), duration: duration)
-        
-        for (index, subview) in stackView.arrangedSubviews.enumerated() {
+                
+        for (index, subview) in arrangedSubviews(with: direction).enumerated() {
             
             let number = index + 1
             let key = "\(key)_\(number)"
@@ -112,6 +111,49 @@ private extension WWMotionGraphicTransition.Louver {
                 subview.layer.add(info.animation, forKey: key)
             }
         }
+    }
+    
+    /// 根據方向的相關設定 (array的排列 / stackView的排列)
+    /// - Parameter direction: WWMotionGraphicTransition.Direction
+    /// - Returns: [UIView]
+    func arrangedSubviews(with direction: WWMotionGraphicTransition.Direction) -> [UIView] {
+        
+        let arrangedSubviews: [UIView]
+        
+        switch direction {
+        case .up:
+            stackView.axis = .vertical
+            arrangedSubviews = stackView.arrangedSubviews.reversed()
+        case .down:
+            stackView.axis = .vertical
+            arrangedSubviews = stackView.arrangedSubviews
+        case .left:
+            stackView.axis = .horizontal
+            arrangedSubviews = stackView.arrangedSubviews.reversed()
+        case .right:
+            stackView.axis = .horizontal
+            arrangedSubviews = stackView.arrangedSubviews
+        }
+        
+        return arrangedSubviews
+    }
+
+    /// 根據方向來決定旋轉的軸 (轉90度)
+    /// - Parameters:
+    ///   - isDisplay: Bool
+    ///   - direction: WWMotionGraphicTransition.Direction
+    /// - Returns: CATransform3D
+    func transform3DRotation(isDisplay: Bool, direction: WWMotionGraphicTransition.Direction) -> CATransform3D {
+        
+        let value: CATransform3D
+        let angle = CGFloat.pi
+        
+        switch direction {
+        case .up, .down: value = CATransform3DMakeRotation(angle * 0.5, 1, 0, 0)
+        case .left, .right: value = CATransform3DMakeRotation(angle * 0.5, 0, 1, 0)
+        }
+        
+        return isDisplay ? value : CATransform3DIdentity
     }
     
     /// 動畫開始的處理

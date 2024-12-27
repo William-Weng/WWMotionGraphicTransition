@@ -11,7 +11,7 @@
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWMotionGraphicTransition.git", .upToNextMajor(from: "1.2.1"))
+    .package(url: "https://github.com/William-Weng/WWMotionGraphicTransition.git", .upToNextMajor(from: "1.2.2"))
 ]
 ```
 
@@ -36,13 +36,11 @@ import WWMotionGraphicTransition
 
 final class ViewController: UIViewController {
 
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var demoView: UIView!
     @IBOutlet weak var faceImageView: UIImageView!
     
     private let duration: TimeInterval = 0.5
     private let colors: [UIColor] = [.red, .yellow, .blue, .green, .orange]
-
+    
     private var count: Int { colors.count }
     private var doorCurtain: WWMotionGraphicTransition.DoorCurtain!
     private var fanBlade: WWMotionGraphicTransition.FanBlade!
@@ -74,7 +72,7 @@ extension ViewController: WWMotionGraphicTransitionDelegate {
     func start(effectView: UIView, number: Int, status: WWMotionGraphicTransition.Status) {
         
         faceImageView.image = UIImage(named: "Face1")
-                
+        
         if (number < count) { return }
         if (status != .end) { return }
         
@@ -87,7 +85,7 @@ extension ViewController: WWMotionGraphicTransitionDelegate {
     
     func end(effectView: UIView, number: Int, status: WWMotionGraphicTransition.Status) {
         
-        if (number < colors.count) { return }
+        if (number < count) { return }
         if (status != .end) { return }
         
         if effectView is WWMotionGraphicTransition.DoorCurtain { doorCurtain.removeFromSuperview(); return }

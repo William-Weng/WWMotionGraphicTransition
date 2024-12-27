@@ -74,12 +74,16 @@ open class WWMotionGraphicTransition {
         
         public override init(frame: CGRect) {
             super.init(frame: frame)
-            stackView._autolayout(on: self)
-            stackView.distribution = .fillEqually
+            initSetting()
         }
         
         required init?(coder: NSCoder) {
             super.init(coder: coder)
+            initSetting()
+        }
+        
+        /// 初始化設定
+        func initSetting() {
             stackView._autolayout(on: self)
             stackView.distribution = .fillEqually
         }

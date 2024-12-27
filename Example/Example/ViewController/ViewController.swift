@@ -11,8 +11,6 @@ import WWMotionGraphicTransition
 // MARK: - ViewController
 final class ViewController: UIViewController {
 
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var demoView: UIView!
     @IBOutlet weak var faceImageView: UIImageView!
     
     private let duration: TimeInterval = 0.5
@@ -50,7 +48,7 @@ extension ViewController: WWMotionGraphicTransitionDelegate {
     func start(effectView: UIView, number: Int, status: WWMotionGraphicTransition.Status) {
         
         faceImageView.image = UIImage(named: "Face1")
-                
+        
         if (number < count) { return }
         if (status != .end) { return }
         
@@ -63,7 +61,7 @@ extension ViewController: WWMotionGraphicTransitionDelegate {
     
     func end(effectView: UIView, number: Int, status: WWMotionGraphicTransition.Status) {
         
-        if (number < colors.count) { return }
+        if (number < count) { return }
         if (status != .end) { return }
         
         if effectView is WWMotionGraphicTransition.DoorCurtain { doorCurtain.removeFromSuperview(); return }
