@@ -7,6 +7,27 @@
 
 import UIKit
 
+// MARK: - UIView (function)
+extension UIView {
+    
+    /// [設定LayoutConstraint => 不能加frame](https://zonble.gitbooks.io/kkbox-ios-dev/content/autolayout/intrinsic_content_size.html)
+    /// - Parameter view: [要設定的View](https://www.appcoda.com.tw/auto-layout-programmatically/)
+    func _autolayout(on view: UIView) {
+
+        removeFromSuperview()
+        view.addSubview(self)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            topAnchor.constraint(equalTo: view.topAnchor),
+            bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+    }
+}
+
 // MARK: - CAShapeLayer (function)
 extension CAShapeLayer {
     
@@ -69,7 +90,7 @@ extension CAAnimation {
     ///   - timingFunction: CAMediaTimingFunction?
     ///   - isRemovedOnCompletion: Bool
     /// - Returns: Constant.CAAnimationInformation
-    static func _basicAnimation(keyPath: WWMotionGraphicTransition.Constant.AnimationKeyPath = .strokeEnd, delegate: CAAnimationDelegate? = nil, fromValue: Any?, toValue: Any?, duration: CFTimeInterval = 5.0, repeatCount: Float = 1.0, fillMode: CAMediaTimingFillMode = .forwards, timingFunction: CAMediaTimingFunction? = nil, isRemovedOnCompletion: Bool = false) -> WWMotionGraphicTransition.Constant.BasicAnimationInformation {
+    static func _basicAnimation(keyPath: WWMotionGraphicTransition.AnimationKeyPath = .strokeEnd, delegate: CAAnimationDelegate? = nil, fromValue: Any?, toValue: Any?, duration: CFTimeInterval = 5.0, repeatCount: Float = 1.0, fillMode: CAMediaTimingFillMode = .forwards, timingFunction: CAMediaTimingFunction? = nil, isRemovedOnCompletion: Bool = false) -> WWMotionGraphicTransition.BasicAnimationInformation {
         
         let animation = CABasicAnimation(keyPath: keyPath.rawValue)
         

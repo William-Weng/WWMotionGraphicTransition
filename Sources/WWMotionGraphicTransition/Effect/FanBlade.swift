@@ -86,7 +86,7 @@ private extension WWMotionGraphicTransition.FanBlade {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) { [unowned self] in
                 mainLayer.addSublayer(shapeLayer)
-                shapeLayer.add(info.animation, forKey: "\(animKeyWord.start)_\(number)")
+                shapeLayer.add(info.animation, forKey: "\(WWMotionGraphicTransition.animKeyWord.start)_\(number)")
             }
         }
     }
@@ -114,7 +114,7 @@ private extension WWMotionGraphicTransition.FanBlade {
             mainLayer.addSublayer(shapeLayer)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) { [unowned self] in
-                shapeLayer.add(info.animation, forKey: "\(animKeyWord.end)_\(number)")
+                shapeLayer.add(info.animation, forKey: "\(WWMotionGraphicTransition.animKeyWord.end)_\(number)")
             }
         }
     }
@@ -140,9 +140,25 @@ private extension WWMotionGraphicTransition.FanBlade {
         return shapeLayer
     }
     
-    /// 動畫開始的處理 + WWMotionGraphicTransitionDelegate
+    /// 動畫開始的處理
     /// - Parameter anim: CAAnimation
     func animationDidStartAction(_ anim: CAAnimation) {
+        animationAction(anim, status: .start)
+    }
+    
+    /// 動畫結束的處理
+    /// - Parameters:
+    ///   - anim: CAAnimation
+    ///   - flag: Bool
+    func animationDidStopAction(_ anim: CAAnimation, finished flag: Bool) {
+        animationAction(anim, status: .end)
+    }
+    
+    /// 動畫處理 + WWMotionGraphicTransitionDelegate
+    /// - Parameters:
+    ///   - anim: CAAnimation
+    ///   - status: WWMotionGraphicTransition.Status
+    func animationAction(_ anim: CAAnimation, status: WWMotionGraphicTransition.Status) {
         
         mainLayer.sublayers?.forEach({ shapeLayer in
             
@@ -157,33 +173,8 @@ private extension WWMotionGraphicTransition.FanBlade {
                     return
                 }
                 
-                if (keyWord == animKeyWord.start) { delegate?.start(effectView: self, number: number - 1, status: .start); return }
-                if (keyWord == animKeyWord.end) { delegate?.end(effectView: self, number: number - 1, status: .start); return }
-            }
-        })
-    }
-    
-    /// 動畫結束的處理 + WWMotionGraphicTransitionDelegate
-    /// - Parameters:
-    ///   - anim: CAAnimation
-    ///   - flag: Bool
-    func animationDidStopAction(_ anim: CAAnimation, finished flag: Bool) {
-        
-        mainLayer.sublayers?.forEach({ shapeLayer in
-            
-            if let key = shapeLayer.animationKeys()?.first(where: { shapeLayer.animation(forKey: $0) === anim }) {
-                
-                let array = key.components(separatedBy: "_")
-                
-                guard let keyWord = array.first,
-                      let value = array.last,
-                      let number = Int(value)
-                else {
-                    return
-                }
-                
-                if (keyWord == animKeyWord.start) { delegate?.start(effectView: self, number: number - 1, status: .end); return }
-                if (keyWord == animKeyWord.end) { delegate?.end(effectView: self, number: number - 1, status: .end); return }
+                if (keyWord == WWMotionGraphicTransition.animKeyWord.start) { delegate?.start(effectView: self, number: number - 1, status: status); return }
+                if (keyWord == WWMotionGraphicTransition.animKeyWord.end) { delegate?.end(effectView: self, number: number - 1, status: status); return }
             }
         })
     }
@@ -210,9 +201,9 @@ private extension WWMotionGraphicTransition.FanBlade {
     /// 動畫Layer層的角度設定
     /// - Parameter direction: WWMotionGraphicTransition.Direction
     /// - Returns: WWMotionGraphicTransition.Constant.AngleRange
-    func angleRange(with direction: WWMotionGraphicTransition.Direction) -> WWMotionGraphicTransition.Constant.AngleRange {
+    func angleRange(with direction: WWMotionGraphicTransition.Direction) -> WWMotionGraphicTransition.AngleRange {
         
-        let range: WWMotionGraphicTransition.Constant.AngleRange
+        let range: WWMotionGraphicTransition.AngleRange
         
         switch direction {
         case .up: range = (start: .pi * 1.0, end: .pi * 0.0, clockwise: true)

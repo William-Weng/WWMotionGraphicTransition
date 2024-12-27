@@ -10,6 +10,8 @@ import UIKit
 // MARK: - WWMotionGraphicTransition
 open class WWMotionGraphicTransition {
     
+    static let animKeyWord: (start: String, end: String) = ("Start", "End")
+    
     /// 過場動畫的狀態
     public enum Status {
         case start                          // 動畫開始
@@ -23,17 +25,10 @@ open class WWMotionGraphicTransition {
         case left                           // 由右而左 (←)
         case right                          // 由左而右 (→)
     }
-    
-    /// Constant
-    public class Constant: NSObject {}
-        
+            
     /// 像單片門簾的開關過場動畫
     public class DoorCurtain: UIView {
-        
         public weak var delegate: WWMotionGraphicTransitionDelegate?
-                
-        public override init(frame: CGRect) { super.init(frame: frame) }
-        required init?(coder: NSCoder) { super.init(coder: coder) }
     }
     
     /// 像電風扇葉片的旋轉過場動畫
@@ -42,11 +37,10 @@ open class WWMotionGraphicTransition {
         public weak var delegate: WWMotionGraphicTransitionDelegate?
         
         let mainLayer = CALayer()
-        let animKeyWord: (start: String, end: String) = ("Start", "End")
 
-        var colors: [UIColor] = []                                  // 過場動畫Layer顏色
-        var layerRadius: CGFloat = 0                                // Layer圓弧半徑
-        var layerCenter: CGPoint = .zero                            // Layer圓弧中點
+        var colors: [UIColor] = []          // 過場動畫Layer顏色
+        var layerRadius: CGFloat = 0        // Layer圓弧半徑
+        var layerCenter: CGPoint = .zero    // Layer圓弧中點
         
         public override init(frame: CGRect) {
             super.init(frame: frame)
@@ -56,6 +50,38 @@ open class WWMotionGraphicTransition {
         required init?(coder: NSCoder) {
             super.init(coder: coder)
             layer.addSublayer(mainLayer)
+        }
+    }
+    
+    /// 像百葉窗的開關過場動畫
+    public class Louver: UIView {
+        
+        static public let rainbowColors = [
+            UIColor(red: 255 / 255, green: 0 / 255, blue: 0 / 255, alpha: 1.0),     // 紅
+            UIColor(red: 255 / 255, green: 127 / 255, blue: 0 / 255, alpha: 1.0),   // 橙
+            UIColor(red: 255 / 255, green: 255 / 255, blue: 0 / 255, alpha: 1.0),   // 黃
+            UIColor(red: 0 / 255, green: 255 / 255, blue: 0 / 255, alpha: 1.0),     // 綠
+            UIColor(red: 0 / 255, green: 0 / 255, blue: 255 / 255, alpha: 1.0),     // 藍
+            UIColor(red: 75 / 255, green: 0 / 255, blue: 130 / 255, alpha: 1.0),    // 靛
+            UIColor(red: 148 / 255, green: 0 / 255, blue: 211 / 255, alpha: 1.0)    // 紫
+        ]
+        
+        public weak var delegate: WWMotionGraphicTransitionDelegate?
+        
+        let stackView = UIStackView()
+        
+        var colors: [UIColor] = []
+        
+        public override init(frame: CGRect) {
+            super.init(frame: frame)
+            stackView._autolayout(on: self)
+            stackView.distribution = .fillEqually
+        }
+        
+        required init?(coder: NSCoder) {
+            super.init(coder: coder)
+            stackView._autolayout(on: self)
+            stackView.distribution = .fillEqually
         }
     }
 }
